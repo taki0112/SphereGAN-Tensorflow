@@ -21,7 +21,7 @@ Simple Tensorflow implementation of SphereGAN (CVPR 2019 Oral) | [paper](http://
 > python main.py --dataset mnist --gan_type sphere --phase train
 ```
 
-### Random test
+### Test
 ```
 > python main.py --dataset mnist --gan_type sphere --phase test
 ```
