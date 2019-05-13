@@ -37,7 +37,7 @@ Simple Tensorflow implementation of SphereGAN (CVPR 2019 Oral) | [paper](http://
 ### Score
 ![score](./assets/result.png)
 
-### Image
+### Image (64x64)
 * The paper only posted the results for `32x32 images`, but I also tried `64x64`
 #### Mnist
 ![mnist](./assets/mnist_64.png)
