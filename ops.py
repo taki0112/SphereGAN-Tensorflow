@@ -385,22 +385,14 @@ def generator_loss(loss_func, fake, moment=3):
 def inverse_stereographic_projection(x) :
 
     x_u = tf.transpose(2 * x) / (tf.pow(tf.norm(x, axis=-1), 2) + 1.0)
-    x_v = (tf.pow(tf.norm(x_u, axis=0, keepdims=True), 2) - 1.0) / (tf.pow(tf.norm(x_u, axis=0, keepdims=True), 2) + 1.0)
+    x_v = (tf.pow(tf.norm(x, axis=-1), 2) - 1.0) / (tf.pow(tf.norm(x, axis=-1), 2) + 1.0)
 
-    x_projection = tf.transpose(tf.concat([x_u, x_v], axis=0))
+    x_projection = tf.transpose(tf.concat([x_u, [x_v]], axis=0))
 
     return x_projection
 
 def sphere_loss(x, y) :
 
-    # x_2 = tf.pow(tf.norm(x, axis=-1, keepdims=True), 2)
-    # y_2 = tf.pow(tf.norm(y, axis=-1, keepdims=True), 2)
-    #
-    # denominator = x_2 * y_2 - x_2 - y_2 + 4*x*y + 1.0
-    # numerator = (x_2 + 1.0) * (y_2 + 1.0)
-    #
-    # loss = tf.math.acos(denominator / numerator)
-
-    loss = tf.math.acos(tf.keras.backend.batch_dot(x, y, axes=1))
+    loss = tf.math.acos(tf.matmul(x, tf.transpose(y)))
 
     return loss
